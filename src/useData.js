@@ -145,3 +145,15 @@ export function useTeam() {
     if (team.length <= 1) return;
     const { error } = await supabase
       .from("team_members")
+          .delete()
+          .eq("name", name);
+        if (error) console.error("Remove member error:", error.message);
+  }
+
+    return {
+          team,
+          addMember,
+          removeMember,
+          refetch: fetchTeam,
+    };
+}
